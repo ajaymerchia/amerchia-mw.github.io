@@ -554,8 +554,13 @@
 	<script>
 		document.getElementById("pay_now_button").addEventListener("click", async function () {
 			try {
-				setLoading(true);
 				let orderId = generateOrderNumber();
+				let email = getEmail();
+				if (!email) {
+					alert("Please provide an email address. You can do this by clicking on the profile icon in the top right.")
+					return
+				}
+				setLoading(true);
 
 				let response = await fetch("https://us-central1-creator-studio-demo.cloudfunctions.net/placeOrder", {
 					method: "POST",
